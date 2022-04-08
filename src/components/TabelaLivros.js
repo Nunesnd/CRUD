@@ -1,9 +1,12 @@
 import React from 'react';
 
-const TabelaLivros = () => {
+const TabelaLivros = ({livros}) => {
     return(
         <div className='livros'>
             <h1>Tabela de Livros</h1>
+            {livros.length === 0 && <h2>Nenhum livro cadastrado</h2>}
+            {livros.length > 0 && (
+            
             <table className='tabela'>
                 <thead>
                     <tr>
@@ -15,19 +18,22 @@ const TabelaLivros = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>ISBN do livro</td>
-                        <td>Título do livro</td>
-                        <td>Autor do livro</td>
-                        <td>
-                            <button className='botao editar'>Editar</button>
-                        </td>
-                        <td>
-                            <button className='botao remover'>Remover</button>
-                        </td>
+                    {livros.map(livro => (
+                        <tr key={livro.isbn}>
+                            <td>{livro.isbn}</td>
+                            <td>{livro.titulo}</td>
+                            <td>{livro.autor}</td>
+                            <td>
+                                <button className='botao editar'>Editar</button>
+                            </td>
+                            <td>
+                                <button className='botao remover'>Remover</button>
+                            </td>
                     </tr>
+                    ))}
                 </tbody>
             </table>
+            )}
         </div>
     );
 };
